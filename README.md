@@ -2,10 +2,25 @@
 
 **Overby Industries — systems software for surface outposts and repair depots.**
 
-## Status: early design
+## Status: early -- first software is in
 
-Nothing is built yet. This repo exists to hold the design work as it
-happens.
+Built and tested (`pip install pytest jsonschema && python -m pytest`):
+
+- **`outpost_core.docking`** -- deterministic docking/handoff scheduler.
+  Higher priority wins; equal-priority ties are broken by ETA but recorded as
+  a `Contention`. Priority 10 is Tier 0 (emergency) and never leaves the
+  deterministic path.
+- **`outpost_core.power`** -- solar + battery ledger with lowest-priority-first
+  load shedding, mapping state of charge onto OTF-1 `nominal/degraded/safe`.
+- **`outpost_core.node`** -- the outpost as an OTF-1 fleet node: emits
+  `status`, answers coordinator `assignment`s with `ack`s (it always has the
+  final say), and ingests reclaimer `event`s into a feedstock inventory.
+- **`outpost_core.advisory`** -- turns an eligible contention into an ADV-1
+  advisory request for [`ai-roundtable`](https://github.com/Overby-Industries/ai-roundtable).
+
+Still open: crewed vs. uncrewed, real power hardware, an `outpost` OTF-1 node
+type ([`docs/otf1-gap.md`](docs/otf1-gap.md)). Cross-repo scenario:
+[`design-studies`](https://github.com/Overby-Industries/design-studies) `integration/`.
 
 ## Why This Is Its Own Repo
 
