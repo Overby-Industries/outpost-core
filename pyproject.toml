@@ -1,0 +1,16 @@
+[project]
+name = "outpost-core"
+version = "0.1.0"
+description = "Systems software for surface outposts and repair depots (Overby Industries)"
+requires-python = ">=3.9"
+license = { text = "Apache-2.0" }
+dependencies = []
+
+[project.optional-dependencies]
+test = ["pytest", "jsonschema"]
+
+[tool.setuptools]
+packages = ["outpost_core"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
